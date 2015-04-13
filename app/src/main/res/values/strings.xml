@@ -3,4 +3,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="app_title">KKBOX 音樂誌</string>
+    <string name="login_and_logout">登入 / 登出</string>
+    <string name="login_name">登入名字</string>
+    <string name="password">密碼</string>
 </resources>
