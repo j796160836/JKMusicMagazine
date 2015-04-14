@@ -2,6 +2,9 @@ package com.example.johnnysung.jkmusicmagazine;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,9 +15,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 
 public class MainActivity extends ActionBarActivity {
 
+    @InjectView(R.id.recycler_view)
+    RecyclerView recycler_view;
 
     private RequestQueue queue;
 
@@ -23,26 +31,16 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-// Instantiate the RequestQueue.
-        queue = Volley.newRequestQueue(this);
+        ButterKnife.inject(this);
 
-
-        StringRequest stringRequest = new StringRequest("http://www.google.com",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("TAG", response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("TAG", error.getMessage(), error);
-
-            }
-        });
-
-        queue.add(stringRequest);
-
+        // 2. set layoutManger
+        recycler_view.setLayoutManager(new LinearLayoutManager(this));
+        // 3. create an adapter
+        MyAdapter mAdapter = new MyAdapter(Const.itemsData);
+        // 4. set adapter
+        recycler_view.setAdapter(mAdapter);
+        // 5. set item animator to DefaultAnimator
+        recycler_view.setItemAnimator(new DefaultItemAnimator());
     }
 
     @Override

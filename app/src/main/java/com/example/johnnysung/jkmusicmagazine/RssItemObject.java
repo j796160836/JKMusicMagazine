@@ -1,22 +1,17 @@
 package com.example.johnnysung.jkmusicmagazine;
 
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
-
 /**
  * Created by johnnysung on 2015/04/13.
  */
-@Root(strict = false)
-public class Item {
+public class RssItemObject {
 
-    @Element(name = "link", type = String.class)
     private String link;
 
-    @Element(name = "description", type = String.class)
     private String description;
 
-    @Element(name = "title", type = String.class)
     private String title;
+
+    private String dateRaw;
 
     public String getLink() {
         return link;
@@ -40,6 +35,14 @@ public class Item {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDateRaw() {
+        return dateRaw;
+    }
+
+    public void setDateRaw(String dateRaw) {
+        this.dateRaw = dateRaw;
     }
 
     @Override

@@ -1,36 +1,26 @@
 package com.example.johnnysung.jkmusicmagazine;
 
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.ElementList;
-import org.simpleframework.xml.Path;
-import org.simpleframework.xml.Root;
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by johnnysung on 2015/04/13.
  */
-@Root(strict = false)
-public class Rss {
+public class RssObject {
 
-    @Element
-    @Path("channel")
     private String title;
 
-    @Element
-    @Path("channel")
     private String description;
 
-    @Element
-    @Path("channel")
     private String pubDate;
 
-    @ElementList(name = "item")
-    @Path("channel")
-    private List<Item> item;
+    private String link;
 
-    public Rss() {
+    private List<RssItemObject> item;
+
+    public RssObject() {
         super();
+        item = new ArrayList<>();
     }
 
     public String getTitle() {
@@ -57,11 +47,19 @@ public class Rss {
         this.pubDate = pubDate;
     }
 
-    public List<Item> getItem() {
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public List<RssItemObject> getItem() {
         return item;
     }
 
-    public void setItem(List<Item> item) {
+    public void setItem(List<RssItemObject> item) {
         this.item = item;
     }
 

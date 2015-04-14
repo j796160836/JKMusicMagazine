@@ -1,5 +1,7 @@
 package com.example.johnnysung.jkmusicmagazine;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -13,16 +15,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
  * Created by johnnysung on 2015/04/13.
  */
-public class LoginActivity extends ActionBarActivity implements View.OnClickListener {
+public class LoginActivity extends Activity implements View.OnClickListener {
 
     @InjectView(R.id.username_ed)
     EditText username_ed;
@@ -53,29 +52,34 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         if (v == login_btn) {
-            StringRequest stringRequest = new StringRequest("http://www.kkbox.com/tw/tc/rss/playlists.xml",
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-//                            Log.d("TAG", response);
-                            try {
-                                Serializer serializer = new Persister();
-                                Rss example = serializer.read(Rss.class, response);
+//            StringRequest stringRequest = new StringRequest("http://www.kkbox.com/tw/tc/rss/playlists.xml",
+//                    new Response.Listener<String>() {
+//                        @Override
+//                        public void onResponse(String response) {
+//                            try {
+//                                RssParser rssParser = new RssParser(response);
+//                                RssParserHandler parserHandler = new RssParserHandler();
+//                                rssParser.setParserHandler(parserHandler);
+//                                rssParser.parse();
+//                                RssObject result = parserHandler.getResult();
+//                                Log.v("Test", result.toString());
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                        }
+//                    }, new Response.ErrorListener() {
+//                @Override
+//                public void onErrorResponse(VolleyError error) {
+//                    Log.e("TAG", error.getMessage(), error);
+//                }
+//            });
+//            queue.add(stringRequest);
 
-                                Log.v("Test", example.toString());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e("TAG", error.getMessage(), error);
-                }
-            });
-            queue.add(stringRequest);
+            intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
 
         } else if (v == create_account_btn) {
 
